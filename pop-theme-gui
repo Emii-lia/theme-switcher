@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+
+import gi
+from pathlib import Path
+
+gi.require_version("Gtk", "3.0")
+from gi.repository import Gtk, Gdk, GdkPixbuf
+
+from pop_theme.__main__ import apply_theme, load_themes
+
+BASE_DIR = Path(__file__).resolve().parent
+PREVIEW_DIR = BASE_DIR / "previews"
+
+class ThemeSwitcher(Gtk.Window):
+  def __init__(self):
+    super().__init__()
+    self.set_title("Pop Theme Switcher")
+    self.set_default_size(1200, 720)
+    self.set_border_width(10)
+
+    vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
+    self.add(vbox)
+
+    label = Gtk.Label(label="Choose a theme:")
+    label.set_margin_bottom(10)
+    label.set_margin_top(5)
+    label.set_name("header-label")
+    vbox.pack_start(label, False, False, 0)
+
+    self.themes = load_themes()
+    self.combo = Gtk.ComboBoxText()
+    for theme in self.themes.keys():
+      self.combo.append_text(theme)
+    self.combo.set_active(0)
+    self.combo.set_hexpand(True)
+    self.combo.connect("changed", self.on_theme_changed)
+    vbox.pack_start(self.combo, False, False, 0)
+
+    self.image = Gtk.Image()
+    vbox.pack_start(self.image, True, True, 0)
+    self.update_preview(self.combo.get_active_text())
+
+    self.apply_button = Gtk.Button(label="Apply")
+    self.get_style_context().add_class("suggested-action")
+    self.apply_button.connect("clicked", self.on_apply)
+    vbox.pack_start(self.apply_button, False, False, 0)
+
+    css = b"""
+      #header-label {
+        font-weight: bold;
+        font-size: 16px;
+      }
+    """
+
+    style_provider = Gtk.CssProvider()
+    style_provider.load_from_data(css)
+    Gtk.StyleContext.add_provider_for_screen(
+      Gdk.Screen.get_default(),
+      style_provider,
+      Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+    )
+
+  def on_theme_changed(self, combo):
+    theme = combo.get_active_text()
+    if theme:
+      self.update_preview(theme)
+
+  def update_preview(self, name):
+    img_path = PREVIEW_DIR / f"{name}.png"
+    if img_path.exists():
+      pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+        str(img_path),
+        1180, 720,
+        True
+      )
+      self.image.set_from_pixbuf(pixbuf)
+    else:
+      self.image.clear()
+
+  def on_apply(self, widget):
+    theme = self.combo.get_active_text()
+    if theme:
+      apply_theme(theme)
+
+
+def main():
+  win = ThemeSwitcher()
+  win.connect("destroy", Gtk.main_quit)
+  win.show_all()
+  Gtk.main()
+
+if __name__ == "__main__":
+  main()
