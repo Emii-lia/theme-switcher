@@ -53,6 +53,14 @@ def update_conky(theme):
     if cfg.exists():
       subprocess.Popen(["conky", "-c", str(cfg)])
 
+def apply_neofetch(name: str):
+  neofetch_source = Path.home() / ".zsh-config/neofetch.zsh"
+  if neofetch_source.exists():
+    content = neofetch_source.read_text()
+    content = re.sub(r'FILENAME="[^"]+"', f'FILENAME="{name}"', content)
+    neofetch_source.write_text(content)
+    print(f"Updated neofetch config to use {name}")
+
 def apply_theme(name: str):
   themes = load_themes()
   if name not in themes:
@@ -132,6 +140,10 @@ def apply_theme(name: str):
     update_conky(theme)
     print(f"Updated conky theme {name}")
 
+  if "neofetch" in theme:
+    apply_neofetch(theme["neofetch"])
+    print(f"Updated neofetch theme {name}")
+
   print(f"Applied theme {name}")
 
 def list_themes():
@@ -152,6 +164,10 @@ def main():
   if args.command == "list":
     list_themes()
   elif args.command == "apply":
+    if not args.theme:
+      print("Please specify a theme to apply")
+      list_themes()
+      return
     apply_theme(args.theme)
   else:
     parser.print_help()
