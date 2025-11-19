@@ -9,6 +9,7 @@ I needed it to smoothly switch between themes without doing tons of configuratio
 - Cursor
 - Gtk-theme
 - Shell theme
+- Neofetch image
 - Conky (fonts, colors, alignment, avatar)
 
 Just for fun
