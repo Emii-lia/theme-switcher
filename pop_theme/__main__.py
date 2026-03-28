@@ -54,10 +54,10 @@ def update_conky(theme):
       subprocess.Popen(["conky", "-c", str(cfg)])
 
 def apply_neofetch(name: str):
-  neofetch_source = Path.home() / ".zsh-config/neofetch.zsh"
+  neofetch_source = Path.home() / ".config/fish/conf.d/neofetch.fish"
   if neofetch_source.exists():
     content = neofetch_source.read_text()
-    content = re.sub(r'FILENAME="[^"]+"', f'FILENAME="{name}"', content)
+    content = re.sub(r'set FILENAME "[^"]+"', f'set FILENAME "{name}"', content)
     neofetch_source.write_text(content)
     print(f"Updated neofetch config to use {name}")
 
@@ -96,15 +96,15 @@ def apply_theme(name: str):
     ])
     print(f"Set icon theme to {theme['icons']}")
 
-  if "font" in theme:
-    subprocess.run([
-      "gsettings",
-      "set",
-      "org.gnome.desktop.interface",
-      "font-family",
-      theme["font"]
-    ])
-    print(f"Set font to {theme['font']}")
+  #if "font" in theme:
+  #  subprocess.run([
+  #    "gsettings",
+  #    "set",
+  #    "org.gnome.desktop.interface",
+  #    "font-family",
+  #    theme["font"]
+  #  ])
+  #  print(f"Set font to {theme['font']}")
 
   if "cursor" in theme:
     subprocess.run([
@@ -116,25 +116,25 @@ def apply_theme(name: str):
     ])
     print(f"Set cursor theme to {theme['cursor']}")
 
-  if "gtk" in theme:
-    subprocess.run([
-      "gsettings",
-      "set",
-      "org.gnome.desktop.interface",
-      "gtk-theme",
-      theme["gtk"]
-    ])
-    print(f"Set gtk theme to {theme['gtk']}")
+  #if "gtk" in theme:
+  #  subprocess.run([
+  #    "gsettings",
+  #    "set",
+  #    "org.gnome.desktop.interface",
+  #    "gtk-theme",
+  #    theme["gtk"]
+  #  ])
+  #  print(f"Set gtk theme to {theme['gtk']}")
 
-  if "shell" in theme:
-    subprocess.run([
-      "gsettings",
-      "set",
-      "org.gnome.shell.extensions.user-theme",
-      "name",
-      theme["shell"]
-    ])
-    print(f"Set shell theme to {theme['shell']}")
+  #if "shell" in theme:
+  #  subprocess.run([
+  #    "gsettings",
+  #    "set",
+  #    "org.gnome.shell.extensions.user-theme",
+  #    "name",
+  #    theme["shell"]
+  #  ])
+  #  print(f"Set shell theme to {theme['shell']}")
 
   if "conky" in theme:
     update_conky(theme)
