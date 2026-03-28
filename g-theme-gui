@@ -6,7 +6,7 @@ from pathlib import Path
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, GdkPixbuf
 
-from pop_theme.__main__ import apply_theme, load_themes
+from g_theme.__main__ import apply_theme, load_themes
 
 BASE_DIR = Path(__file__).resolve().parent
 PREVIEW_DIR = BASE_DIR / "previews"
