@@ -14,7 +14,7 @@ PREVIEW_DIR = BASE_DIR / "previews"
 class ThemeSwitcher(Gtk.Window):
   def __init__(self):
     super().__init__()
-    self.set_title("Pop Theme Switcher")
+    self.set_title("Gnome Theme Switcher")
     self.set_default_size(1200, 720)
     self.set_border_width(10)
 
