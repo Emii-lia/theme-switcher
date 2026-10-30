@@ -139,6 +139,52 @@
     },
     "neofetch": "arle-2.png"
   },
+  "suoming": {
+    "wallpaper": "/home/emiii/Pictures/backgrounds/suoming.jpg",
+    "icons": "Ketsa-icons",
+    "cursor": "Bocchi-The-Cursor",
+    "gtk": "Lavanda-Sea-Dark",
+    "shell": "Orchis-Dark",
+    "conky": {
+      "mirach": {
+        "fonts": {
+          "font": "Roboto:size=2",
+          "font1": "Electroharmonix:bold:size=47",
+          "font2": "Electroharmonix:bold:size=44",
+          "font3": "Great Vibes:light:size=29",
+          "font4": "Electroharmonix:bold:size=13",
+          "font5": "Dosis:medium:size=12",
+          "font6": "Material:size=11",
+          "font7": "Dosis:size=11",
+          "font8": "Dosis:bold:size=15"
+        },
+        "colors": {
+          "color1": "#FAECEC",
+          "color2": "#DB8382",
+          "color3": "#EAF1F3",
+          "color4": "#DB8382"
+        },
+        "alignment": "bottom_left"
+      },
+      "regulus": {
+        "fonts": {
+          "font": "Roboto:light:size=9",
+          "font1": "Bebas Neue:bold:size=110",
+          "font2": "Electroharmonix:size=16",
+          "font3": "Kogni Gear:bold:size=11",
+          "font4": "Electroharmonix:bold:size=24",
+          "font5": "Abel:size=12"
+        },
+        "colors": {
+          "color1": "#AB0000",
+          "color2": "#AB0000",
+          "color3": "#272330"
+        },
+        "avatar": "~/.config/conky/Regulus/res/avatar/suoming.png"
+      }
+    },
+    "neofetch": "suoming.png"
+  },
   "chisa-1": {
     "wallpaper": "/home/emiii/Pictures/backgrounds/chisa-1.png",
     "icons": "Ketsa-icons",
@@ -185,6 +231,7 @@
     },
     "neofetch": "chisa-1.png"
   },
+
   "chisa-2": {
     "wallpaper": "/home/emiii/Pictures/backgrounds/chisa-2.png",
     "icons": "Ketsa-icons",
